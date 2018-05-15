@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TestWebApp.Models.Home;
 
 namespace TestWebApp.Controllers
 {
@@ -13,18 +14,17 @@ namespace TestWebApp.Controllers
             return View();
         }
 
-        public ActionResult About()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(HomeViewModel model)
         {
-            ViewBag.Message = "Your application description page.";
+            if (ModelState.IsValid)
+            {
+                return Json(true);
+            }
 
-            return View();
+            return Json(false);
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }
